@@ -1,0 +1,30 @@
+let cps = 9;
+let intervalID;
+let isAutoClickerActive = false;
+
+function click() {
+  ModAPI.clickMouse();
+}
+
+function startAutoClicker() {
+  if (!isAutoClickerActive) {
+    let intervalTime = 1000 / cps;
+    intervalID = setInterval(click, intervalTime);
+    isAutoClickerActive = true;
+  }
+}
+
+function stopAutoClicker() {
+  clearInterval(intervalID);
+  isAutoClickerActive = false;
+}
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'p') {
+    if (isAutoClickerActive) {
+      stopAutoClicker();
+    } else {
+      startAutoClicker();
+    }
+  }
+});
